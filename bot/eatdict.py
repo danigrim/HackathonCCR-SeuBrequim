@@ -1,0 +1,1 @@
+eatDictionary = ['comer', 'come', 'fome', 'quero comer', 'food', 'jantar', 'almoco', 'almoço']
