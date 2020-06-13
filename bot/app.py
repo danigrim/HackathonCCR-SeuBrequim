@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from twilio.twiml.messaging_response import MessagingResponse
 import re
 
-SECRET_KEY = 'a secret key'
+SECRET_KEY = 'chapa zap key'
 app = Flask(__name__)
 app.config.from_object(__name__)
 
@@ -55,6 +55,16 @@ def get_location(msg_arr):
         location_dict['rodoviaria'] = find_street_name(road_index, msg_arr)
     return location_dict
 
+def share_preference(msg_arr):
+    positives = {'sim', 'quero', 'positivo', 's', 'yes', 'siim', 'pode'}
+    negatives = {'não', 'nao', 'nada', 'errado', 'talvez', 'naao', 'naoo', 'N'}
+    for word in msg_arr:
+        if word in negatives:
+            return False
+        elif word in positives:
+            return True
+    return False
+
 
 @app.route("/", methods=['POST'])
 def sms_reply():
@@ -63,39 +73,66 @@ def sms_reply():
     phone_no = request.form.get('From')
     reply = ''
     match_lst = []
+    #Info sobre a conversa
     step = session.get('step', 0)
+    first = session.get('first', [True, True])
     req = session.get('req', '')
     loc = session.get('loc', {})
-        #Case mandar mensagem introdutoria
-    if len(req) == 0 or len(loc)==0:
+    sharing = session.get('share', False)
+    #Primeira vez contactando o Seu Brequim
+    if first[0]:
+        reply = "Prazer! Eu o Seu Brequim! \nVou te dar dicas dos melhores " \
+                "lugares para comer, se higienizar e descansar com baixo custo na estrada. Também posso" \
+                "te avisar quando tiverem amigos caminhoneiros por perto. Se você quiser compartilhar sua localizacao com amigos," \
+                "responda 'sim', caso contrario responda 'não' e só te dou dicas"
+        first = [False, True]
+        #Case respondeu com preferência.
+    elif (not first[0]) and first[1]:
+        sharing = share_preference(msg_arr)
+        if sharing == True:
+            reply = 'Obrigada por compartilhar sua localizacao. Você nunca mais estará sozinho na estrada!\n' \
+                    'Se estiver procurando servicos de qualidade na estrada, ' \
+                    'é só me pedir o que você quer (comida, parada, amigos, banho) e eu te ajudo!'
+        elif sharing == False:
+            reply = 'Sem problemas, não vou compartilhar sua localizacao.\n ' \
+                    ' Se estiver procurando servicos de qualidade na estrada, ' \
+                    'é só me pedir o que você quer (comida, parada, amigos, banho) e eu te ajudo!'
+        first = [False, False]
+    #Cliente reconhecido
+    else:
+        if len(req) == 0 or len(loc)==0:
         # Case usuario pediu serviço
-        match_lst = find_requests(msg_arr)
-        if len(match_lst) > 0:
-            req = match_lst[0]
-            reply = "Entendi, você quer " + match_lst[0] + " ! Por gentileza, me informe a rodoviaria e km onde você se encontra"
+            match_lst = find_requests(msg_arr)
+            if len(match_lst) > 0:
+                req = match_lst[0]
+                reply = "Entendi, você quer " + match_lst[0] + " ! Por gentileza, me informe a rodoviaria e km onde você se encontra"
+                step += 1
+            elif step > 0 and len(req)==0:
+                reply = "Não entendi o que você quer"
+        if step == 0:
+            reply = "Oi meu amigo, bom te ver por aqui. O que você procura?"
             step += 1
-        elif step > 0 and len(req)==0:
-            reply = "Não entendi o que você quer"
-    if step == 0:
-        reply = "Oi! Eu sou seu chapa do zap. Quero melhorar sua experiência na estrada. O que você procura?"
-        step += 1
-    elif len(req) > 0 and len(reply) == 0:
-        loc = get_location(msg_arr)
-        street_name = loc.get('rodoviaria', 0)
-        km = loc.get('km', 0)
-        if not km or not street_name:
-            reply = "Não encontrei essa localizacao"
-        else:
-            reply = "Aqui está " + str(req) + " na rodoviaria " + str(street_name) + " e no Km " + str(km) + ". Obrigada pela confianca!"
-            step = 0
-            loc = {}
-            req = ''
+        elif len(req) > 0 and len(reply) == 0:
+            loc = get_location(msg_arr)
+            street_name = loc.get('rodoviaria', 0)
+            km = loc.get('km', 0)
+            if not km or not street_name:
+                reply = "Não encontrei essa localizacao"
+            else:
+                reply = "Aqui está " + str(req) + " na rodoviaria " + str(street_name) + " e no Km " + str(km) + ". Obrigada pela confianca!"
+                step = 0
+                loc = {}
+                req = ''
+                sharing = False
+                first = [True, True]
     # Create reply
     resp = MessagingResponse()
     resp.message(reply)
     session['step'] = step
     session['req'] = req
     session['loc'] = loc
+    session['first'] = first
+    session['sharing'] = sharing
     return str(resp)
 
 
