@@ -8,7 +8,7 @@ url = "https://maps.googleapis.com/maps/api/staticmap?"
 icon_url ='https://www.muygle.com/node-red/muygle/api/language?name=police'
 lugares  = ['police','supermarket']
 
-def main():
+def flow(origem,lugares=[]):
 
     # Google client
     gmaps = googlemaps.Client(key = API_key)
@@ -23,6 +23,8 @@ def main():
 
     list = places_results['results']
     pins =''
+    names={}
+    count=0
     for i in list:
         name     =  i['name']
         lat_long =  i['geometry']['location']
@@ -30,6 +32,8 @@ def main():
         long     = str(lat_long['lng'])
         local    = str(lat+','+long)
         pins    += '|'+local
+        names[str(count)] = name
+        count+=1
 
     #Gerando o mapa
     r = requests.get(url+'center='+origem+'&zoom=15&format=jpg&size=600x600&markers=anchor:bottomright|'
@@ -39,4 +43,4 @@ def main():
     f = open('seubrequin.jpg', 'wb')
     f.write(r.content)
     f.close()
-    return 0
+    return names
