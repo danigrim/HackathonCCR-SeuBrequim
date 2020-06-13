@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5ada703b-e82a-4f3c-8951-37be502c9b42" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/maps/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="5ada703b-e82a-4f3c-8951-37be502c9b42" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +18,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -80,5 +78,9 @@
       <screen x="0" y="0" width="1366" height="736" />
     </state>
     <state width="1345" height="165" key="GridCell.Tab.0.right/0.0.1366.736/1366.0.1366.768@0.0.1366.736" timestamp="1592085302203" />
+    <state x="244" y="60" key="SettingsEditor" timestamp="1592091679164">
+      <screen x="0" y="23" width="1440" height="832" />
+    </state>
+    <state x="244" y="60" key="SettingsEditor/0.23.1440.832@0.23.1440.832" timestamp="1592091679164" />
   </component>
 </project>
