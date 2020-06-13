@@ -55,6 +55,7 @@ def get_location(msg_arr):
         location_dict['rodoviaria'] = find_street_name(road_index, msg_arr)
     return location_dict
 
+
 def share_preference(msg_arr):
     positives = {'sim', 'quero', 'positivo', 's', 'yes', 'siim', 'pode'}
     negatives = {'não', 'nao', 'nada', 'errado', 'talvez', 'naao', 'naoo', 'N'}
