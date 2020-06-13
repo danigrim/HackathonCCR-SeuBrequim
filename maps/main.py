@@ -1,29 +1,39 @@
 import googlemaps
-import pprint
-import gmplot
-import time
+import requests
+import geocoding
 
 API_key = 'AIzaSyDVyd-mpP6ugSDfe0AmRaVusa7BUCp-A5o'
+origem = 'rodovia presidente castelo branco km 300'
+url = "https://maps.googleapis.com/maps/api/staticmap?"
+icon_url ='https://www.muygle.com/node-red/muygle/api/language?name=police'
+lugares  = 'police'
 
+# Google client
 gmaps = googlemaps.Client(key = API_key)
 
-places_results = gmaps.places_nearby(location =' -23.563114, -46.654554 ',radius = 4000,open_now = False ,
-                                     type ='school')
+# Geocoding convert
+a =geocoding.convert()
+lat,lng  = a.logradouro_para_coordenadas(origem)
+
+# Encontrando Lugares próximos
+places_results = gmaps.places_nearby(location = (lat,lng),radius = 2000,open_now = False ,
+                                     type =lugares)
 
 list = places_results['results']
-
-list_lat  = []
-list_long = []
+pins =''
 for i in list:
     name     =  i['name']
     lat_long =  i['geometry']['location']
-    lat      = lat_long['lat']
-    list_lat +=[lat]
-    long     = lat_long['lng']
-    list_long+=[long]
+    lat      = str(lat_long['lat'])
+    long     = str(lat_long['lng'])
+    local    = str(lat+','+long)
+    pins    += '|'+local
+
+#Gerando o mapa
+r = requests.get(url+'center='+origem+'&zoom=15&format=jpg&size=600x600&markers=anchor:bottomright|'
+                                      'icon:'+icon_url+pins+'&key='+API_key)
 
 
-gmap = gmplot.GoogleMapPlotter (-23.562258,-46.655366,15)
-gmap.scatter(list_lat, list_long, 'red', size = 10)
-gmap.apikey =API_key
-gmap.draw('/home/gabriel/gmplot.png')
+f = open('seubrequin.jpg', 'wb')
+f.write(r.content)
+f.close()
