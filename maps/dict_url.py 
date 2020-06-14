@@ -1,0 +1,10 @@
+#icons
+
+#abastecimento
+ab    =  'https://ccr-hack-2020.s3.us-east-2.amazonaws.com/abastecimento.png'
+ab_g  =  'https://ccr-hack-2020.s3.us-east-2.amazonaws.com/abastecimento_gold.png'
+
+#alimentacao
+
+ali   =  'https://ccr-hack-2020.s3.us-east-2.amazonaws.com/alimentacao.png'
+ali_g =  'https://ccr-hack-2020.s3.us-east-2.amazonaws.com/alimentacao_gold.png'
