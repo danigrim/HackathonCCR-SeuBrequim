@@ -157,16 +157,16 @@ def sms_reply():
             else:
                 google_places = googleMapsPlaces.get(req)
                 origem = "rodovia " + str(street_name) + " km " + str(km)
-                places_dict, url = flow(origem, google_places)
+                places_dict, picture_url = flow(origem, google_places)
                 if len(places_dict) == 0:
                     reply = "Infelizmente, não encontrei nada perto de você. Sugiro que dirija mais" \
                             " um pouco, e me chame novamente!"
                 else:
                     session['dicas'] = places_dict
-                    reply = map_reply(req) + str(places_dict.get("1"))
+                    reply = map_reply(req) + str(places_dict.get("0"))
                     resp = MessagingResponse()
                     msg = resp.message(reply)
-                    msg.media(url)
+                    msg.media(str(picture_url))
                     return str(resp)
         elif step == 4:
             selected = ''
