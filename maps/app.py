@@ -50,11 +50,13 @@ def direction_reply(sharing, word, dicas):
     selected = dicas.get(word)[0]
     address = dicas.get(word)[1]
     distance = dicas.get(word)[2]
+    distance = distance[:-1]
     friend_count = find_friends(selected)
     if sharing:
-        return "Você selecionou o seguinte estabelecimento: " + str(selected) + "O endereco de lá é: " + str(address) + " E está a " + str(distance) + " Tem " + str(friend_count) + \
-               " chapas do Seu Brequin lá. Se estiver se sentindo sozinho, tente encontrá-los" + "uto(s)"
-    return "Você selecionou o seguinte estabelecimento: " + str(selected) + "O endereco de lá é: " + str(address) + " E está a " + str(distance) + "uto(s)"
+        return "Você selecionou o seguinte estabelecimento: " + str(selected) + " O endereco de lá é: " + str(address) + " E está a " + str(distance) + "uto(s)" +\
+               " Tem " + str(friend_count) + \
+               " chapas do Seu Brequin lá. Lembre que, depois que você conhece o Seu Brequin, você nunca mais estará sozinho na estrada! "
+    return "Você selecionou o seguinte estabelecimento: " + str(selected) + " O endereco de lá é: " + str(address) + " E está a " + str(distance)
 
 
 # Get location from user message
@@ -107,7 +109,7 @@ def sms_reply():
     loc = session.get('loc', {})
     dicas = session.get('dicas', {})
     selected = session.get('selected', '')
-    sharing = session.get('share', False)
+    sharing = session.get('share', True)
     if len(req) > 0 and len(loc) == 0:
         step = 3
     if len(dicas) > 0:
@@ -128,7 +130,7 @@ def sms_reply():
     else:
         if msg_arr[0]=="00":
             re_init_session(session)
-            reply ="Sem problemas, vou recomeçar essa sessão"
+            reply ="Obrigada pela confiança amigo(a), sempre que precisar, chama o Seu Brequin!"
             resp = MessagingResponse()
             resp.message(reply)
             return str(resp)
@@ -144,7 +146,7 @@ def sms_reply():
                 req =''
         #Greet returning client
         if step == 0:
-            reply = "Oi meu amigo, bom te ver por aqui. O que você procura?"
+            reply = "Que bom ouvir de você. O que você procura?"
             step = 1
         elif step == 3:
             #Location provided
@@ -159,8 +161,7 @@ def sms_reply():
                 origem = "rodovia " + str(street_name) + " km " + str(km)
                 places_dict, picture_url = flow(origem, google_places)
                 if len(places_dict) == 0:
-                    reply = "Infelizmente, não encontrei nada perto de você. Sugiro que dirija mais" \
-                            " um pouco, e me chame novamente!"
+                    reply = "Infelizmente, não encontrei nada perto de você! Dirija mais um pouco, e me chame novamente!"
                 else:
                     session['dicas'] = places_dict
                     reply = map_reply(req) + str(places_dict.get("0"))

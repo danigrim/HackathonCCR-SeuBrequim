@@ -1,9 +1,8 @@
 friends_dict = {
-    'Pizzaria Sportello' : ['user0', 'user1', 'user2'],
-    'Armazém da Pizza' : ['user3', 'user4', 'user5'],
-    'House of Pizza' : ['user6', 'user7', 'user8'],
-    'Papitus Burguer' : ['user 9', 'useer 10'],
-    'Subway' : ['user11', 'user12']
+    'Padaria E Confeitaria Central de Barueri' : ['user0', 'user1', 'user2'],
+    'Tapiocaria La Santa' : ['user0', 'user1', 'user2'],
+    'Esquina 76' : ['user3', 'user4',],
+    'Caffè Mio' : ['user5', 'user6']
 }
 
 
