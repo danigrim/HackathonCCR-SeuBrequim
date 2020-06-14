@@ -2,7 +2,8 @@ friends_dict = {
     'Pizzaria Sportello' : ['user0', 'user1', 'user2'],
     'Armazém da Pizza' : ['user3', 'user4', 'user5'],
     'House of Pizza' : ['user6', 'user7', 'user8'],
-    'Papitus Burguer' : ['user 9', 'useer 10']
+    'Papitus Burguer' : ['user 9', 'useer 10'],
+    'Subway' : ['user11', 'user12']
 }
 
 

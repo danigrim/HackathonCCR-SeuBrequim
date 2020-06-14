@@ -8,9 +8,9 @@ API_key = 'AIzaSyDVyd-mpP6ugSDfe0AmRaVusa7BUCp-A5o'
 
 origem = 'rodovia presidente castelo branco km 300'
 url = "https://maps.googleapis.com/maps/api/staticmap?"
+
 icon_url ='https://ccr-hack-2020.s3.us-east-2.amazonaws.com/banheiro.png'
 lugares  = ['restaurant']
-
 
 
 def flow(origem,lugares=[]):
@@ -38,6 +38,7 @@ def flow(origem,lugares=[]):
         long     = str(lat_long['lng'])
         local    = str(lati+','+long)
         distance = gmaps.distance_matrix((lat, lng), (lati, long), mode="driving")
+
         if count <= 9:
 
             pins    += '|'+local
@@ -45,7 +46,6 @@ def flow(origem,lugares=[]):
             time = distance['rows'][0]['elements'][0]['duration']['text']
             names[str(count)] = [name, dest_address, time]
             pins_number +='&markers=color:red|label:'+str(count)+'|size:mid|'+local
-        count+=1
 
 
     #Gerando o mapa
@@ -61,5 +61,3 @@ def flow(origem,lugares=[]):
     amazon_url = upload.up('seubrequin.jpeg')
 
     return names,amazon_url
-
-flow(origem,lugares)
