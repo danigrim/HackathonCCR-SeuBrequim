@@ -11,7 +11,6 @@ from message_reply import welcome_text, thanks_for_sharing, thanks_fornot_sharin
 SECRET_KEY = 'chapa zap key'
 app = Flask(__name__)
 app.config.from_object(__name__)
-MEDIA_URL ="https://ccr-hack-2020.s3.us-east-2.amazonaws.com/abastecimento"
 
 
 def find_requests(msg_arr):
@@ -47,12 +46,15 @@ def find_street_name(road_index, msg_arr):
 
 
 #final direction to restaurant
-def direction_reply(sharing, selected):
+def direction_reply(sharing, word, dicas):
+    selected = dicas.get(word)[0]
+    address = dicas.get(word)[1]
+    distance = dicas.get(word)[2]
     friend_count = find_friends(selected)
     if sharing:
-        return "Você selecionou o seguinte estabelecimento: " + str(selected) + " Tem " + str(friend_count) + \
-               " chapas do Seu Brequin lá. Se estiver se sentindo sozinho, tente encontrá-los"
-    return "Você selecionou o seguinte estabelecimento: " + str(selected)
+        return "Você selecionou o seguinte estabelecimento: " + str(selected) + "O endereco de lá é: " + str(address) + " E está a " + str(distance) + " Tem " + str(friend_count) + \
+               " chapas do Seu Brequin lá. Se estiver se sentindo sozinho, tente encontrá-los" + "uto(s)"
+    return "Você selecionou o seguinte estabelecimento: " + str(selected) + "O endereco de lá é: " + str(address) + " E está a " + str(distance) + "uto(s)"
 
 
 # Get location from user message
@@ -106,6 +108,10 @@ def sms_reply():
     dicas = session.get('dicas', {})
     selected = session.get('selected', '')
     sharing = session.get('share', False)
+    if len(req) > 0 and len(loc) == 0:
+        step = 3
+    if len(dicas) > 0:
+        step = 4
     #First contact message
     if first[0]:
         reply = welcome_text
@@ -120,12 +126,11 @@ def sms_reply():
         first = [False, False]
     #Returning client
     else:
-        if msg_arr[0]=="0":
+        if msg_arr[0]=="00":
             re_init_session(session)
             reply ="Sem problemas, vou recomeçar essa sessão"
             resp = MessagingResponse()
-            msg = resp.message(reply)
-            msg.media(SEUBRE)
+            resp.message(reply)
             return str(resp)
         if len(req) == 0:
         #Service requested
@@ -136,34 +141,42 @@ def sms_reply():
                 step += 1
             elif step > 0 and len(req) == 0:
                 reply = "Não entendi o que você quer. Tente um pedido"
+                req =''
         #Greet returning client
         if step == 0:
             reply = "Oi meu amigo, bom te ver por aqui. O que você procura?"
-            step += 1
-        elif len(req) > 0 and len(reply) == 0 and len(loc) == 0:
+            step = 1
+        elif step == 3:
             #Location provided
             loc = get_location(msg_arr)
             street_name = loc.get('rodovia', 0)
             km = loc.get('km', 0)
             if not km or not street_name:
-                reply = "Não encontrei essa localizacao. Tente novamente, ou digite 0 para re iniciar a conversa"
+                reply = "Não encontrei essa localizacao. Tente novamente, ou digite 00 para re iniciar a conversa"
                 loc = {}
             else:
                 google_places = googleMapsPlaces.get(req)
                 origem = "rodovia " + str(street_name) + " km " + str(km)
-                lst = flow(origem, google_places)
-                dicas = lst
-                reply = map_reply(req) + str(lst)
-                step += 1
-        elif len(loc)>0 and len(req)>0:
+                places_dict = flow(origem, google_places)
+                if len(places_dict) == 0:
+                    reply = "Infelizmente, não encontrei nada perto de você. Sugiro que dirija mais" \
+                            " um pouco, e me chame novamente!"
+                else:
+                    session['dicas'] = places_dict
+                    reply = map_reply(req) + str(places_dict.get("1"))
+                    resp = MessagingResponse()
+                    msg = resp.message(reply)
+                    msg.media("https://ccr-hack-2020.s3.us-east-2.amazonaws.com/seubrequin.png")
+                    return str(resp)
+        elif step == 4:
             selected = ''
             for word in msg_arr:
                 if word.isdigit():
                     selected = dicas.get(word, '')
                     if len(selected) == 0:
-                        reply = "Esse número não está no mapa! Digite algum número do mapa, ou 0 para finalizar"
+                        reply = "Esse número não está no mapa! Digite algum número do mapa, ou 00 para finalizar"
                     else:
-                        reply = direction_reply(sharing, selected)
+                        reply = direction_reply(sharing, word, dicas)
                         # session ended
                         re_init_session(session)
     # Create reply

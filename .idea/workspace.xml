@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5ada703b-e82a-4f3c-8951-37be502c9b42" name="Default Changelist" comment="" />
+    <list default="true" id="5ada703b-e82a-4f3c-8951-37be502c9b42" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/maps/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/findmyfriends.py" beforeDir="false" afterPath="$PROJECT_DIR$/maps/findmyfriends.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/language.py" beforeDir="false" afterPath="$PROJECT_DIR$/maps/language.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/maps/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/seubrequin.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/maps/seubrequin.jpg" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +27,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/maps" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ChapaDoZap" />
@@ -35,7 +47,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/maps/main.py" />
       <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -62,6 +74,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="200" y="85" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592092182431">
+      <screen x="0" y="23" width="1440" height="832" />
+    </state>
+    <state x="200" y="85" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.832@0.23.1440.832" timestamp="1592092182431" />
     <state width="1345" height="165" key="GridCell.Tab.0.bottom" timestamp="1592085302203">
       <screen x="0" y="0" width="1366" height="736" />
     </state>
