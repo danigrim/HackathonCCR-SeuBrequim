@@ -157,7 +157,7 @@ def sms_reply():
             else:
                 google_places = googleMapsPlaces.get(req)
                 origem = "rodovia " + str(street_name) + " km " + str(km)
-                places_dict = flow(origem, google_places)
+                places_dict, url = flow(origem, google_places)
                 if len(places_dict) == 0:
                     reply = "Infelizmente, não encontrei nada perto de você. Sugiro que dirija mais" \
                             " um pouco, e me chame novamente!"
@@ -166,7 +166,7 @@ def sms_reply():
                     reply = map_reply(req) + str(places_dict.get("1"))
                     resp = MessagingResponse()
                     msg = resp.message(reply)
-                    msg.media("https://ccr-hack-2020.s3.us-east-2.amazonaws.com/seubrequin.png")
+                    msg.media(url)
                     return str(resp)
         elif step == 4:
             selected = ''

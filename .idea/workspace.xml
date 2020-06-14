@@ -4,10 +4,6 @@
     <list default="true" id="5ada703b-e82a-4f3c-8951-37be502c9b42" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maps/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/maps/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/findmyfriends.py" beforeDir="false" afterPath="$PROJECT_DIR$/maps/findmyfriends.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/language.py" beforeDir="false" afterPath="$PROJECT_DIR$/maps/language.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/maps/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/seubrequin.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/maps/seubrequin.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
