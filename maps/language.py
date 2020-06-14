@@ -2,7 +2,7 @@
 
 googleMapsPlaces = {
     #'eat': ['meal_delivery', 'meal_takeaway', 'restaurant', 'bakery', 'cafe', 'supermarket'],
-    'eat': ['restaurants'],
+    'eat': ['meal_takeaway'],
     'sleep': ['gas_station', 'bus_station', 'parking', 'transit_station', 'train_station'],
     'bathroom': ['gas_station', 'restaurant'],
     'help': ['fire_station', 'police' ]

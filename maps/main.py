@@ -46,7 +46,7 @@ def flow(origem,lugares=[]):
             time = distance['rows'][0]['elements'][0]['duration']['text']
             names[str(count)] = [name, dest_address, time]
             pins_number +='&markers=color:red|label:'+str(count)+'|size:mid|'+local
-    count += 1
+        count += 1
 
     #Gerando o mapa
     r = requests.get(url+'center='+origem+'&zoom=14&format=jpg&size=600x600&markers=color:blue|label:S|'

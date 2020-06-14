@@ -26,9 +26,9 @@ def map_reply(req):
         key_word = 'ir ao banheiro'
     elif req == 'sleep':
         key_word = 'descansar'
-    return " Nessa foto você vê um mapa com os melhores lugares para " + key_word + " Em" \
-                        " ouro está a melhor qualidade e preço" \
-                       "Se quiser mais informações sobre algum lugar " \
+    return " Nessa foto você vê um mapa com os melhores lugares para " + key_word + ". Em" \
+                        " ouro está a melhor qualidade e preço." \
+                       " Se quiser saber o endereço, distância ou quantos amigos do Brequin estão lá, " \
                        "é só digitar o *numero* ao lado do ponto no mapa."
 
 
