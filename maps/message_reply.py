@@ -6,14 +6,14 @@ welcome_text = " Prazer, eu sou o Seu Brequim! " \
                "parte da *comunidade Seu Brequim*, responda “sim”, caso contrário responda “não” e " \
                 "só te dou dicas."
 
-thanks_for_sharing = 'Obrigada por compartilhar sua localização. ' \
+thanks_for_sharing = 'Obrigado por compartilhar sua localização. ' \
                     '*Você nunca mais estará sozinho na estrada!*' \
                     'Se estiver procurando serviços de qualidade na estrada é só perguntar ' \
                     'por *restaurantes*, *paradas*, *banheiros*, *SOS*, *serviços médicos* e eu te ajudo!'
 
 thanks_fornot_sharing = 'Tudo bem amigo, pode deixar que não vou compartilhar sua localizacao. ' \
                     'Se estiver procurando serviços de qualidade na estrada é só perguntar ' \
-                    'por *restaurantes*, *paradas*, **banheiros**, *SOS*, *serviços médicos* e eu te ajudo!'
+                    'por *restaurantes*, *paradas*, *banheiros*, *SOS*, *serviços médicos* e eu te ajudo!'
 
 
 def map_reply(req):
@@ -27,7 +27,7 @@ def map_reply(req):
     elif req == 'sleep':
         key_word = 'descansar'
     return " Nessa foto você vê um mapa com os melhores lugares para " + key_word + ". Em" \
-                        " ouro está a melhor qualidade e preço." \
+                        " amarelo estão os estabelecimentos com o selo de qualidade Seu Brequim." \
                        " Se quiser saber o endereço, distância ou quantos amigos do Brequim estão lá, " \
                        "é só digitar o *numero* ao lado do ponto no mapa."
 

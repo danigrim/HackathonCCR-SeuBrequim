@@ -55,7 +55,7 @@ lugares  = 'gas_station'
 
 
 def flow(origem,lugares):
-
+    icon_url = "https://ccr-hack-2020.s3.us-east-2.amazonaws.com/banheiro.png"
     # Google client
     gmaps = googlemaps.Client(key = API_key)
 
@@ -96,12 +96,11 @@ def flow(origem,lugares):
                 else:
                     icon_url = ban
 
-            pins  += '&markers=anchor:bottomright|icon:'+str(icon_url)+'|'+local
+            pins  += '&markers=anchor:bottomright|icon:'+ str(icon_url)+ '|'+local
             dest_address = distance['destination_addresses'][0]
             time = distance['rows'][0]['elements'][0]['duration']['text']
             names[str(count)] = [name, dest_address, time]
             pins_number +='&markers=color:red|label:'+str(count)+'|size:mid|'+local
-
         count += 1
 
     #Gerando o mapa

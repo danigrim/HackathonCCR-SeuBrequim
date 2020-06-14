@@ -53,9 +53,13 @@ def direction_reply(sharing, word, dicas):
     distance = distance[:-1]
     friend_count = find_friends(selected)
     if sharing:
-        return "Você selecionou o seguinte estabelecimento: " + str(selected) + " O endereco de lá é: " + str(address) + " E está a " + str(distance) + "uto(s)" +\
+        if friend_count:
+            return "Você selecionou o seguinte estabelecimento: " + str(selected) + " O endereco de lá é: " + str(address) + " E está a " + str(distance) + "uto(s)" +\
                " Tem " + str(friend_count) + \
                " chapas do Seu Brequim lá. Lembre que, depois que você conhece o Seu Brequim, você nunca mais estará sozinho na estrada! "
+        else:
+            return "Você selecionou o seguinte estabelecimento: " + str(selected) + " O endereco de lá é: " + str(address) + " E está a " + str(distance) + "uto(s)" +\
+               " Infelizmente, não tem amigos do Seu Brequim lá agora.  "
     return "Você selecionou o seguinte estabelecimento: " + str(selected) + " O endereco de lá é: " + str(address) + " E está a " + str(distance)
 
 
@@ -130,7 +134,7 @@ def sms_reply():
     else:
         if msg_arr[0]=="00":
             re_init_session(session)
-            reply ="Obrigada pela confiança amigo(a), sempre que precisar, chama o Seu Brequim!"
+            reply ="Obrigado pela confiança amigo(a), sempre que precisar, chama o Seu Brequim!"
             resp = MessagingResponse()
             resp.message(reply)
             return str(resp)
@@ -164,7 +168,7 @@ def sms_reply():
                     reply = "Infelizmente, não encontrei nada perto de você! Dirija mais um pouco, e me chame novamente!"
                 else:
                     session['dicas'] = places_dict
-                    reply = map_reply(req) + str(places_dict.get("0"))
+                    reply = map_reply(req)
                     resp = MessagingResponse()
                     msg = resp.message(reply)
                     msg.media(str(picture_url))
