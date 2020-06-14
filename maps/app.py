@@ -55,7 +55,7 @@ def direction_reply(sharing, word, dicas):
     if sharing:
         return "Você selecionou o seguinte estabelecimento: " + str(selected) + " O endereco de lá é: " + str(address) + " E está a " + str(distance) + "uto(s)" +\
                " Tem " + str(friend_count) + \
-               " chapas do Seu Brequin lá. Lembre que, depois que você conhece o Seu Brequin, você nunca mais estará sozinho na estrada! "
+               " chapas do Seu Brequim lá. Lembre que, depois que você conhece o Seu Brequim, você nunca mais estará sozinho na estrada! "
     return "Você selecionou o seguinte estabelecimento: " + str(selected) + " O endereco de lá é: " + str(address) + " E está a " + str(distance)
 
 
@@ -130,7 +130,7 @@ def sms_reply():
     else:
         if msg_arr[0]=="00":
             re_init_session(session)
-            reply ="Obrigada pela confiança amigo(a), sempre que precisar, chama o Seu Brequin!"
+            reply ="Obrigada pela confiança amigo(a), sempre que precisar, chama o Seu Brequim!"
             resp = MessagingResponse()
             resp.message(reply)
             return str(resp)
